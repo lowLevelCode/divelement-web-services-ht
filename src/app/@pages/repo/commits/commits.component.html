@@ -28,8 +28,8 @@
                         </div>
                       </div>
                     </td>
-                    <td> {{c.author.date}} </td>
-                    <td> {{c.sha}} </td>
+                    <td> {{c.author.date | fromNowDate}} </td>
+                    <td> {{c.sha | stringCutter:8}} </td>
                   </tr>
 
                 </tbody>
