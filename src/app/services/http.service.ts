@@ -31,5 +31,5 @@ export class HttpService {
     }
 
     Git = (moreUrl:string= '') => this.operationsBuilder(`${AppEndpoint.URL_API_GIT}${moreUrl}`);
-    GitRepos = (moreUrl:string= '') => this.operationsBuilder(`${AppEndpoint.URL_API_GIT_REPOS}${moreUrl}`);
+    GitRepos = (moreUrl:string= '') => this.operationsBuilder(`${AppEndpoint.URL_API_GIT_REPOS}${moreUrl}`);    
 }

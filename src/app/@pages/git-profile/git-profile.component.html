@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="span3 well">
+    <div style="text-align: center;">
+      <img
+        [src]="user.avatar_url"
+        name="aboutme" width="140" height="140" class="img-circle">
+      <br><br>
+
+      <span>{{user.login}}</span>
+      -      
+      <span>Member Since {{user.created_at | date:"MMMM dd, yyyy"}}</span>
+    </div>
+  </div>
+</div>
