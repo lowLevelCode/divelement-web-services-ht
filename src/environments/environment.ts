@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  gitApiBaseUrl:'https://api.github.com'
+  gitApiBaseUrl:'https://api.github.com',
+  userlogin: 'lowLevelCode',
+  reponame: 'divelement-web-services-ht',
 };
 
 /*

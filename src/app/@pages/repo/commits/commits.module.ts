@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CommitsRoutingModule } from './commits-routing.module';
 import { CommitsComponent } from './commits.component';
+import { HttpService } from 'src/app/services/http.service';
 
 
 @NgModule({
@@ -10,6 +11,7 @@ import { CommitsComponent } from './commits.component';
   imports: [
     CommonModule,
     CommitsRoutingModule
-  ]
+  ],
+  providers:[HttpService]
 })
 export class CommitsModule { }

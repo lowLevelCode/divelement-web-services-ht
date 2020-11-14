@@ -1,18 +1,43 @@
 <div class="container">
-    <div class="row">    
-        <section class="content">
-            <h1>Commits History</h1>
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="table-container">
-                            <table class="table table-filter">
-                                <tbody id="content-table-body"></tbody>
-                            </table>
+  <div class="row">
+    <section class="content">
+      <h1>Commits History</h1>
+      <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="table-container">
+              <table class="table table-filter">
+                <tbody id="content-table-body">
+                  <tr *ngFor="let c of commits">
+                    <td style="width: 10%;">
+                      <div class="media">
+                        <a [routerLink]="c.routerToUser" class="pull-left">
+                          <img [src]="c.avatar_url" class="media-photo">
+                        </a>
+                      </div>
+                    </td>
+                    <td style="width: 50%;">
+                      <div class="media">
+                        <div class="media-body">
+                          <a href="#">
+                            <h4 class="title"> {{c.message}} </h4>
+                          </a>
+                          <a [routerLink]="c.routerToUser">
+                            <p class="summary"> {{c.author.name}} </p>
+                          </a>
                         </div>
-                    </div>
-                </div>                    
+                      </div>
+                    </td>
+                    <td> {{c.author.date}} </td>
+                    <td> {{c.sha}} </td>
+                  </tr>
+
+                </tbody>
+              </table>
             </div>
-        </section>
-    </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
