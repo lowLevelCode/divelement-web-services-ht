@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="span3 well">
+  <div class="well">
     <div style="text-align: center;">
       <img
         [src]="user.avatar_url"
@@ -8,7 +8,31 @@
 
       <span>{{user.login}}</span>
       -      
-      <span>Member Since {{user.created_at | date:"MMMM dd, yyyy"}}</span>
+      <span>Member Since {{user.created_at | date:"MMMM dd, yyyy"}}</span>          
     </div>
   </div>
+  <mat-tab-group mat-align-tabs="center" color="accent" backgroundColor="primary" style="margin-top: -30px;">
+    <mat-tab label="Overview">
+        <div>
+            <h1>Github Graph</h1>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+            <div style="width: 46%;">
+                <h1>Public Activity</h1>
+                <mat-divider></mat-divider>
+                <div>
+                    holas
+                </div>
+                <mat-divider></mat-divider>
+            </div>
+
+            <div style="width: 47%;">
+                <h1>Public Repositories</h1>
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Activity">Content 2</mat-tab>
+    <mat-tab label="Personal Projects">Content 3</mat-tab>
+  </mat-tab-group>
 </div>

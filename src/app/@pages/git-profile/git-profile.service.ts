@@ -7,6 +7,10 @@ export class GitProfileService {
   constructor(private readonly _httpService:HttpService) { }
 
   findUserByUsername(username:string):Observable<any> {
-    return this._httpService.Git(`/users/${username}`).get();
+    return this._httpService.GitUser(`/${username}`).get();
+  }
+
+  getPublicActivity(username:string):Observable<any>{
+    return this._httpService.GitUser(`/${username}/events`).get();
   }
 }
