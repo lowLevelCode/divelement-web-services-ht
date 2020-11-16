@@ -1,0 +1,9 @@
+<mat-list>
+    <div mat-subheader>{{title}}</div>
+    <mat-list-item *ngFor="let d of repositories">
+      <mat-icon mat-list-icon>{{d.iconName}}</mat-icon>
+      <div mat-line>{{d.name}}</div>
+      <div mat-line> {{d.updated | date}} </div>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
