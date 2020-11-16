@@ -8,6 +8,7 @@ interface Activity {
 }
 
 
+
 @Component({
   selector: 'app-git-profile',
   templateUrl: './git-profile.component.html',
@@ -16,7 +17,41 @@ interface Activity {
 export class GitProfileComponent implements OnInit {
 
   user:any;
-  activities:any[];
+  activities: any[] = [
+    {
+      name: 'Photos',
+      updated: new Date('1/1/16'),
+      iconName:'people'
+    },
+    {
+      name: 'Recipes',
+      updated: new Date('1/17/16'),
+      iconName:'folder'
+    },
+    {
+      name: 'Work',
+      updated: new Date('1/28/16'),
+      iconName:'person'
+    }
+  ];
+
+  repositories: any[] = [
+    {
+      name: 'Photos',
+      updated: new Date('1/1/16'),
+      iconName:'email'
+    },
+    {
+      name: 'Recipes',
+      updated: new Date('1/17/16'),
+      iconName:'folder'
+    },
+    {
+      name: 'Work',
+      updated: new Date('1/28/16'),
+      iconName:'person'
+    }
+  ];
 
   constructor(
     private route: ActivatedRoute, 

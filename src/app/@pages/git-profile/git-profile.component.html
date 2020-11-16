@@ -5,7 +5,7 @@
         [src]="user.avatar_url"
         name="aboutme" width="140" height="140" class="img-circle">
       <br><br>
-
+      <h2>no name</h2>
       <span>{{user.login}}</span>
       -      
       <span>Member Since {{user.created_at | date:"MMMM dd, yyyy"}}</span>          
@@ -17,22 +17,24 @@
             <h1>Github Graph</h1>
         </div>
         <div style="display: flex; justify-content: space-between;">
-            <div style="width: 46%;">
-                <h1>Public Activity</h1>
-                <mat-divider></mat-divider>
-                <div>
-                    holas
-                </div>
-                <mat-divider></mat-divider>
+            <div style="width: 46%;">              
+              <app-public-activity-list title="Public Activity" [activities]="activities"></app-public-activity-list>
             </div>
 
-            <div style="width: 47%;">
-                <h1>Public Repositories</h1>
-                <mat-divider></mat-divider>
+            <div style="width: 47%;">              
+              <app-public-repositories-list title="Public Repositories" [repositories]="repositories"></app-public-repositories-list>
             </div>
         </div>
     </mat-tab>
-    <mat-tab label="Activity">Content 2</mat-tab>
-    <mat-tab label="Personal Projects">Content 3</mat-tab>
+    <mat-tab label="Activity">
+      <div>
+        <app-public-activity-list title="Most Recent Activity" [activities]="activities"></app-public-activity-list>
+      </div>
+    </mat-tab>
+    <mat-tab label="Personal Projects">
+      <div>
+        <app-public-repositories-list title="Public Repositories" [repositories]="repositories"></app-public-repositories-list>
+      </div>
+    </mat-tab>
   </mat-tab-group>
 </div>

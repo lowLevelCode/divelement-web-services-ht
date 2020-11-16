@@ -7,15 +7,18 @@ import { HttpService } from 'src/app/services/http.service';
 import { GitProfileService } from './git-profile.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs'; 
-import { MatDividerModule } from "@angular/material/divider";
+import { PublicActivityListModule } from 'src/app/shared/components/public-activity-list/public-activity-list.module';
+import { PublicRepositoriesListModule } from 'src/app/shared/components/public-repositories-list/public-repositories-list.module';
+
 @NgModule({
   declarations: [GitProfileComponent],
   imports: [
     CommonModule,
     GitProfileRoutingModule,
     HttpClientModule,
-    MatTabsModule,
-    MatDividerModule
+    MatTabsModule,    
+    PublicActivityListModule,
+    PublicRepositoriesListModule
   ],
   providers:[HttpService, GitProfileService]
 })
