@@ -1,1 +1,31 @@
-<p>home works!</p>
+<div class="container">
+  <div style="display: flex; width: 100%; justify-content: space-between; padding: 5%;">
+    <a [routerLink]="['/repo/commits']">
+        <mat-card class="card-container">
+            <mat-card-header>              
+              <mat-card-title>History Commits</mat-card-title>              
+            </mat-card-header>
+            <img mat-card-image src="../../../assets/img/history-commits.png" alt="screenshot of history commits" height="300" width="300">
+            <mat-card-content>
+              <p>
+                This shows git commit history for this project.
+              </p>
+            </mat-card-content>
+          </mat-card>
+    </a>
+
+    <a [routerLink]="['/git-profile/lowLevelCode']">
+        <mat-card class="card-container">
+            <mat-card-header>              
+              <mat-card-title>Git Profile</mat-card-title>              
+            </mat-card-header>
+            <img mat-card-image src="../../../assets/img/profile.png" alt="screenshot of git profile" height="300" width="300">
+            <mat-card-content>
+              <p>
+                This shows the git profile.
+              </p>
+            </mat-card-content>
+        </mat-card>
+    </a>
+  </div>
+</div>
