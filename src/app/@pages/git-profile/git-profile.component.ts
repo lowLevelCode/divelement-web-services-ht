@@ -45,20 +45,22 @@ export const gitTypeEvent = [
 })
 export class GitProfileComponent implements OnInit {
 
-  user:any;
+  user:any;  
   activities: Activity[] = [];  
   repositories: Repository[] = [];
 
-  constructor(
+  constructor(    
     private route: ActivatedRoute, 
     private readonly _gitProfileService:GitProfileService) { }
 
   ngOnInit(): void {
+
     // find user
     this.route.params.subscribe(data=> {
-      const {username} = data;
+      const {username} = data;      
       this._gitProfileService.findUserByUsername(username).subscribe(user=>{
         this.user = {
+          name:user.name,
           login: `@${user.login}`,
           created_at:user.created_at,
           avatar_url: user.avatar_url
@@ -70,7 +72,7 @@ export class GitProfileComponent implements OnInit {
         act.forEach(e => {                                      
           let activity:any;
           // maybe this should be a factory
-          if(e.type == TypeGitEvent.PUSH){ // if is a puhs event, the paylod contains commits.            
+          if(e.type == TypeGitEvent.PUSH){ // if is a puss event, the paylod contains commits.            
             this.activities.push(
               ...this.CreateGitEventPushDataType(e)
             )
@@ -78,10 +80,7 @@ export class GitProfileComponent implements OnInit {
           else if(e.type == TypeGitEvent.CREATE){
             this.activities.push(this.CreateGitEventCreateDataType(e));
           }
-        });
-        
-
-        
+        });        
       });
 
       // get public repos
@@ -103,7 +102,7 @@ export class GitProfileComponent implements OnInit {
       const {sha, message} = element;
       return {
         iconName,
-        username: 'username',
+        username: '',
         userlogin: login,
         created_at:created_at,
         typeActivityDescription:`${event} to branch master at ${name}`,                
@@ -121,7 +120,7 @@ export class GitProfileComponent implements OnInit {
 
     return {
       iconName,
-      username: 'username',
+      username: '',
       userlogin: login,
       created_at:created_at,
       typeActivityDescription:`${event} at ${name}`,
