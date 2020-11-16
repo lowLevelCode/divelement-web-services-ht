@@ -18,7 +18,7 @@ import { PublicRepositoriesListModule } from 'src/app/shared/components/public-r
     HttpClientModule,
     MatTabsModule,    
     PublicActivityListModule,
-    PublicRepositoriesListModule
+    PublicRepositoriesListModule,
   ],
   providers:[HttpService, GitProfileService]
 })

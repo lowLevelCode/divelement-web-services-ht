@@ -2,13 +2,13 @@
   <div class="well">
     <div style="text-align: center;">
       <img
-        [src]="user.avatar_url"
+        [src]="user?.avatar_url"
         name="aboutme" width="140" height="140" class="img-circle">
       <br><br>
       <h2>no name</h2>
-      <span>{{user.login}}</span>
+      <span>{{user?.login}}</span>
       -      
-      <span>Member Since {{user.created_at | date:"MMMM dd, yyyy"}}</span>          
+      <span>Member Since {{user?.created_at | date:"MMMM dd, yyyy"}}</span>          
     </div>
   </div>
   <mat-tab-group mat-align-tabs="center" color="accent" backgroundColor="primary" style="margin-top: -30px;">

@@ -13,4 +13,8 @@ export class GitProfileService {
   getPublicActivity(username:string):Observable<any>{
     return this._httpService.GitUser(`/${username}/events`).get();
   }
+
+  getPublicRepos(username:string):Observable<any>{
+    return this._httpService.GitUser(`/${username}/repos`).get();
+  }
 }

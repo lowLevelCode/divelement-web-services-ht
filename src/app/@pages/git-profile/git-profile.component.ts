@@ -2,11 +2,40 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GitProfileService } from './git-profile.service';
 
-interface Activity {
-  title:string;
+interface Repository{
   iconName:string;
+  name:string;
+  description:string;
+  created_at:Date;
 }
 
+interface Activity {
+  iconName:string;
+  username:string;
+  userlogin:string;
+  created_at:Date;
+  typeActivityDescription:string;  
+  sha:string;
+  message:string;
+}
+
+export enum TypeGitEvent {
+  PUSH = 'PushEvent',
+  CREATE = 'CreateEvent',
+}
+
+export const gitTypeEvent = [
+  {
+      type:TypeGitEvent.PUSH,
+      iconName:'linear_scale',
+      event:'Pushed'
+  },
+  {
+    type:TypeGitEvent.CREATE,
+    iconName:'autorenew',
+    event:'Created'
+  }
+];
 
 
 @Component({
@@ -17,41 +46,8 @@ interface Activity {
 export class GitProfileComponent implements OnInit {
 
   user:any;
-  activities: any[] = [
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-      iconName:'people'
-    },
-    {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
-      iconName:'folder'
-    },
-    {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-      iconName:'person'
-    }
-  ];
-
-  repositories: any[] = [
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-      iconName:'email'
-    },
-    {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
-      iconName:'folder'
-    },
-    {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-      iconName:'person'
-    }
-  ];
+  activities: Activity[] = [];  
+  repositories: Repository[] = [];
 
   constructor(
     private route: ActivatedRoute, 
@@ -70,10 +66,78 @@ export class GitProfileComponent implements OnInit {
       });
 
       // get public activity 
-      this._gitProfileService.getPublicActivity(username).subscribe(act=> {
-        console.log("activity", act);
-      })
+      this._gitProfileService.getPublicActivity(username).subscribe(act=> {        
+        act.forEach(e => {                                      
+          let activity:any;
+          // maybe this should be a factory
+          if(e.type == TypeGitEvent.PUSH){ // if is a puhs event, the paylod contains commits.            
+            this.activities.push(
+              ...this.CreateGitEventPushDataType(e)
+            )
+          }          
+          else if(e.type == TypeGitEvent.CREATE){
+            this.activities.push(this.CreateGitEventCreateDataType(e));
+          }
+        });
+        
+
+        
+      });
+
+      // get public repos
+      this._gitProfileService.getPublicRepos(username).subscribe(repos=>{
+        this.repositories = repos.map(this.CreateGitUserReposDataType);        
+      });
+
     });    
-  }  
+  }
+
+  // *** The factories ***
+
+  private CreateGitEventPushDataType(data): any[]{
+    const {iconName, event} = gitTypeEvent.find(gitType=> gitType.type == data.type);
+    const {actor:{login}, repo:{name}, created_at} = data;
+    const {payload:{commits}} = data;    
+
+    return commits.map(element => {      
+      const {sha, message} = element;
+      return {
+        iconName,
+        username: 'username',
+        userlogin: login,
+        created_at:created_at,
+        typeActivityDescription:`${event} to branch master at ${name}`,                
+        sha:sha.slice(0,8),
+        message: `· ${message}`
+      };
+    });
+
+  }
+
+  private CreateGitEventCreateDataType(data): any{
+    const {iconName, event} = gitTypeEvent.find(gitType=> gitType.type == data.type);
+    const {actor:{login}, repo:{name}, created_at} = data;    
+    const {payload:{description}} = data;        
+
+    return {
+      iconName,
+      username: 'username',
+      userlogin: login,
+      created_at:created_at,
+      typeActivityDescription:`${event} at ${name}`,
+      sha:'',
+      message: `${description || 'No description'}`
+    };    
+  }
+
+  private CreateGitUserReposDataType(data): Repository{
+    const {name, description, created_at} = data;        
+    return {
+      iconName:'view_agenda',
+      name,
+      description: description || 'Not Description.',
+      created_at
+    }
+  }
 
 }

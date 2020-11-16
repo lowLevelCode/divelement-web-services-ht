@@ -2,8 +2,25 @@
   <div mat-subheader>{{title}}</div>
   <mat-list-item *ngFor="let a of activities">
     <mat-icon mat-list-icon>{{a.iconName}}</mat-icon>
-    <div mat-line>{{a.name}}</div>
-    <div mat-line> {{a.updated | date}} </div>
+    <div mat-line style="display: flex; justify-content: space-between;">
+      <div>
+        {{a.username}} @{{a.userlogin}}
+      </div>
+      <div>
+        {{a.created_at |  fromNowDate}}
+      </div>
+    </div>  
+
+    <div mat-line> 
+      <div>
+        {{a.typeActivityDescription}}
+      </div>
+    </div>
+    <div mat-line> 
+      <div>
+        <span style="color: teal;">{{a.sha}}</span> <span>{{a.message}}</span>
+      </div>
+    </div>    
     <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>
